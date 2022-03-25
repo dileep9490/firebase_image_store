@@ -8,6 +8,7 @@ class FormWidget extends StatelessWidget {
     required this.prefixIcon,
     required this.hintText,
     this.obscureText = false,
+    required this.validator,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -15,16 +16,17 @@ class FormWidget extends StatelessWidget {
   final IconData prefixIcon;
   final String hintText;
   final bool obscureText;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      //TODO: implement validator
       autofocus: false,
       controller: controller,
       onSaved: (value) {
         controller.text = value!;
       },
+      validator: validator,
       textInputAction: textInputAction,
       decoration: InputDecoration(
         prefixIcon: Icon(prefixIcon),
